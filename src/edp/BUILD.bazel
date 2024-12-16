@@ -1,0 +1,11 @@
+load("@wfa_rules_kotlin_jvm//kotlin:defs.bzl", "kt_jvm_library")
+
+kt_jvm_library(
+    name = "EdpClient",
+    srcs = ["EdpClient.kt"],
+    deps = [
+        "@any_sketch_java//src/main/java/org/wfanet/anysketch:sketch_proto_converter",
+        "@any_sketch_java//src/main/java/org/wfanet/frequencycount:secret_share_generator_adapter",
+        "@any_sketch_java//src/main/java/org/wfanet/sampling:vid_sampler",
+    ],
+)
