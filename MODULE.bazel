@@ -44,6 +44,8 @@ maven.install(
         "org.wfanet.measurement.eventdataprovider:shareshuffle-native:0.5.13",
         "org.wfanet.measurement.api:v2alpha-kotlin:0.5.13",
         "org.wfanet.measurement.api:v2alpha-grpc-kotlin:0.5.13",
+        # Test
+        "junit:junit:4.13.2",
     ],
     fail_if_repin_required = True,
     fetch_sources = True,  # For IDE integration.

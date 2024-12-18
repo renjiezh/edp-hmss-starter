@@ -1,0 +1,45 @@
+load("@wfa_rules_kotlin_jvm//kotlin:defs.bzl", "kt_jvm_test")
+load("@wfa_rules_kotlin_jvm//kotlin:defs.bzl", "kt_jvm_proto_library")
+
+kt_jvm_proto_library(
+    name = "frequency_vector_kt_jvm_proto",
+    deps = [
+        "@any_sketch//src/main/proto/wfa/frequency_count:frequency_vector_proto",
+    ],
+)
+
+kt_jvm_proto_library(
+    name = "sketch_kt_jvm_proto",
+    deps = ["@any_sketch//src/main/proto/wfa/any_sketch:sketch_proto"],
+)
+
+kt_jvm_proto_library(
+    name = "el_gamal_key_kt_jvm_proto",
+    deps = ["@any_sketch//src/main/proto/wfa/any_sketch/crypto:el_gamal_key_proto"],
+)
+
+kt_jvm_proto_library(
+    name = "sketch_encryption_methods_kt_jvm_proto",
+    deps = ["@any_sketch//src/main/proto/wfa/any_sketch/crypto:sketch_encryption_methods_proto"],
+)
+
+kt_jvm_test(
+    name = "EdpClientTest",
+    srcs = ["EdpClientTest.kt"],
+    test_class = "src.test.edp.EdpClientTest",
+    deps = [
+        ":el_gamal_key_kt_jvm_proto",
+        ":frequency_vector_kt_jvm_proto",
+        ":sketch_encryption_methods_kt_jvm_proto",
+        ":sketch_kt_jvm_proto",
+        "@any_sketch_java//src/main/java/org/wfanet/anysketch:sketch_proto_converter",
+        "@any_sketch_java//src/main/java/org/wfanet/anysketch/crypto:sketch_encrypter_adapter",
+        "@any_sketch_java//src/main/java/org/wfanet/frequencycount:secret_share_generator_adapter",
+        "@any_sketch_java//src/main/java/org/wfanet/sampling:vid_sampler",
+        "@maven//:junit_junit",
+        "@maven//:org_wfanet_measurement_api_v2alpha_grpc_kotlin",
+        "@maven//:org_wfanet_measurement_api_v2alpha_kotlin",
+        "@maven//:org_wfanet_measurement_eventdataprovider_shareshuffle_v2alpha",
+        "@wfa_rules_kotlin_jvm//imports/kotlin/test",
+    ],
+)
